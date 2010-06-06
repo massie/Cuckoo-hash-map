@@ -25,7 +25,7 @@ import java.util.Set;
  * 
  */
 
-public class CuckooHash<K, V> extends AbstractMap<K, V> implements
+public class CuckooHashMap<K, V> extends AbstractMap<K, V> implements
 		Map<K, V> {
 
 	static final int DEFAULT_INITIAL_CAPACITY = 16;
@@ -34,7 +34,7 @@ public class CuckooHash<K, V> extends AbstractMap<K, V> implements
 
 	/* Test main */
 	public static void main(String[] args) {
-		Map<Integer, String> map = new CuckooHash<Integer, String>();
+		Map<Integer, String> map = new CuckooHashMap<Integer, String>();
 		int itemCount = 25;
 		for (int i = 0; i < itemCount; i++) {
 			Integer key = i;
@@ -97,7 +97,7 @@ public class CuckooHash<K, V> extends AbstractMap<K, V> implements
 		}
 
 		public final K getKey() {
-			return CuckooHash.unmaskNull(key);
+			return CuckooHashMap.unmaskNull(key);
 		}
 
 		public final V getValue() {
@@ -146,7 +146,7 @@ public class CuckooHash<K, V> extends AbstractMap<K, V> implements
 
 	static final Object NULL_KEY = new Object();
 
-	public CuckooHash() {
+	public CuckooHashMap() {
 		this.loadFactor = DEFAULT_LOAD_FACTOR;
 		threshold = (int) (DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);
 		table = new Entry[DEFAULT_INITIAL_CAPACITY];
@@ -155,20 +155,20 @@ public class CuckooHash<K, V> extends AbstractMap<K, V> implements
 		init();
 	}
 
-	public CuckooHash(HashFunction<K> h1, HashFunction<K> h2) {
+	public CuckooHashMap(HashFunction<K> h1, HashFunction<K> h2) {
 		this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR, h1, h2);
 	}
 
-	public CuckooHash(int initialCapacity) {
+	public CuckooHashMap(int initialCapacity) {
 		this(initialCapacity, DEFAULT_LOAD_FACTOR);
 	}
 
-	public CuckooHash(int initialCapacity, float loadFactor) {
+	public CuckooHashMap(int initialCapacity, float loadFactor) {
 		this(initialCapacity, loadFactor, new DefaultHashFunction<K>(2),
 				new DefaultHashFunction<K>(3));
 	}
 
-	public CuckooHash(int initialCapacity, float loadFactor,
+	public CuckooHashMap(int initialCapacity, float loadFactor,
 			HashFunction<K> h1, HashFunction<K> h2) {
 		int capacity = 1;
 		while (capacity < initialCapacity)
@@ -182,7 +182,7 @@ public class CuckooHash<K, V> extends AbstractMap<K, V> implements
 		init();
 	}
 
-	public CuckooHash(Map<? extends K, ? extends V> m) {
+	public CuckooHashMap(Map<? extends K, ? extends V> m) {
 		this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,
 				DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
 	}
